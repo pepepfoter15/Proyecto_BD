@@ -5,7 +5,18 @@ El proyecto consiste en realizar tres programas en Python que realice operacione
 
 Debes seleccionar al menos 3 tablas relacionadas de tu proyecto de la cual vas a extraer información.
 
-Crea un enunciado, donde indiques las operaciones a realizar. Tienes que incluir al menos las siguientes funciones:
+-Las tablas que utilizaremos serán las siguientes:
+  - Aeropuerto
+  - Nacional
+  - Internacional
+
+  - Tripulación
+  - Auxiliares
+  - Piloto
+  - Copiloto
+
+Adjunto un SQL con las creaciones de las tablas y los respectivos inserts.
+Tras esto, el enunciado de este ejercicio es:
 
 - Listar información: Listarme toda información de la tabla aeropuerto.
 
