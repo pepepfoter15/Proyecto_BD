@@ -22,7 +22,7 @@ Tras esto, el enunciado de este ejercicio es:
 
 - Buscar o filtrar información: Pedir el codigo de los aeropuertos y que nos muestre la dirección de dicho aeropuerto.
 
-- Buscar información relacionada: Pedimos el codigo de un empleado y que nos muestre el nombre, teléfono y número de pasaporte.
+- Buscar información relacionada: Pedimos el codigo del aeropuerto,que sea nacional, para que nos muestre la longuitud de la pista de aterrizaje y la orientación de las pistas (implico 2 tablas: nacional y aeropuerto).
 
 - Insertar información: Pedir un codigo de aeropuerto nuevo, su respectiva dirección, teléfono y nombre de director. 
 
