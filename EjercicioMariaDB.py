@@ -1,5 +1,6 @@
 from FuncionesMariaDB import *
 
+#Ejercicio para la prueba de la funciones
 db = conectar_BD("localhost","pepe","root","pythonbbdd")
 opcionelegida = menu()
 
