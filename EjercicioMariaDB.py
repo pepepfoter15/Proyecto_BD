@@ -24,7 +24,7 @@ while opcionelegida != 7:
     elif opcionelegida == 6:
         opcion6(db)
     
-    menu()
+    opcionelegida=menu()
 
 if opcionelegida == 7:
     desconectar_BD(db)
