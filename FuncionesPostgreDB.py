@@ -4,10 +4,10 @@ import psycopg2
 #Función para conectar la base de datos de Maria DB con Python
 def conectar_BD():
     try:
-        db = psycopg2.connect(user="javier", 
-                              password="javier", 
-                              host="192.168.105.133", 
-                              database="pepe")
+        db = psycopg2.connect(user="pepe", 
+                              password="pepe", 
+                              host="localhost", 
+                              database="pythonbbdd")
 
     except psycopg2.Error as e:
         print("No se pudo conectar a la base de datos:", e)
