@@ -2,19 +2,19 @@ import sys
 import cx_Oracle
 
 #Función para conectar la base de datos de Maria DB con Python
-def conectar_BD(host, user, password, database):
+def conectar_BD():
     try:
-        db = cx_Oracle.connect(
-            host=host,
-            user=user,
-            password=password,
-            database=database
-        )
-    except cx_Oracle.Error as e:
+        db = cx_Oracle.connector.connect(
+            user='pepe', 
+            password='pepe',
+            host='localhost',
+            database='pythonbbdd')
+
+    except cx_Oracle.connector.Error as e:
         print("No se pudo conectar a la base de datos:", e)
         sys.exit(1)
 
-    print("Conexión correcta a Oracle.")
+    print("Conexión correcta a MariaDB.")
     return db
 
 #Función para desconetar la base de datos 
@@ -52,7 +52,8 @@ def opcion1(db):
         registros = cursor.fetchall()
         for registro in registros:
             print("Código aeropuerto:", registro[0], "Dirección:", registro[1], "Teléfono:", registro[2], "Nombre del director:", registro[3])
-
+            
+        return registros
         db.commit() 
     except:
         db.rollback()
@@ -61,14 +62,14 @@ def opcion1(db):
 #2 ejercicio -> Buscar o filtrar información: Pedir el codigo de los aeropuertos y que nos muestre la dirección de dicho aeropuerto.
 def opcion2(db):
     codigo_aeropuerto = input("Introduce el código del aeropuerto: ")
-    sql="SELECT Direccion FROM aeropuerto WHERE cod_aeropuerto = %s;" % (codigo_aeropuerto)
+    sql="SELECT Direccion FROM aeropuerto WHERE cod_aeropuerto = '%s';" % (codigo_aeropuerto)
     cursor = db.cursor()
     try:
         cursor.execute(sql)
         registros = cursor.fetchall()
         for registro in registros:
             print("Dirección:", registro[0])
-
+            return registros
         db.commit()
     except:
         db.rollback()
@@ -77,7 +78,7 @@ def opcion2(db):
 #3 ejercicio -> Buscar información relacionada: Pedimos el codigo del aeropuerto,que sea nacional, para que nos muestre la longuitud de la pista de aterrizaje y la orientación de las pistas (implico 2 tablas: nacional y aeropuerto).
 def opcion3(db):
     codigo_aeropuerto_nacional = input("Introduce el codigo del aeropuerto nacional: ")
-    sql = "SELECT Longitud_pista_aterrizaje, Orientacion_pista FROM nacional n WHERE cod_aeropuerto = %s in (SELECT cod_aeropuerto FROM aeropuerto a WHERE n.cod_aeropuerto = n.cod_aeropuerto);" % codigo_aeropuerto_nacional
+    sql = "SELECT Longitud_pista_aterrizaje, Orientacion_pista FROM nacional n WHERE cod_aeropuerto = '%s' in (SELECT cod_aeropuerto FROM aeropuerto a WHERE n.cod_aeropuerto = a.cod_aeropuerto);" % (codigo_aeropuerto_nacional)
     cursor = db.cursor()
     try:
         cursor.execute(sql)
@@ -86,7 +87,8 @@ def opcion3(db):
             longitud= registro[0]
             orientacion =registro[1]
             print("Longitud de pista de aterrizaje:",longitud,"Orientación de la pista:",orientacion)
-
+        
+        return registros
         db.commit()
     except:
         db.rollback()
@@ -111,7 +113,7 @@ def opcion4(db):
 #5 ejercicio -> Borrar información: Pedir por teclado el código de empleado y que borre toda la información respetiva a ese empleado.
 def opcion5(db):
     codigo_empleado = input("Introduce el codigo del empleado: ")
-    sql= "DELETE FROM tripulacion WHERE cod_empleado = %s;" %codigo_empleado
+    sql= "DELETE FROM tripulacion WHERE cod_empleado = '%s';" % (codigo_empleado)
     cursor = db.cursor()
     try:
         cursor.execute(sql)
@@ -125,7 +127,7 @@ def opcion5(db):
 def opcion6(db):
     codigo_aeropuerto = input("Introduce el codigo del aeropuerto que quieres modificar su dirección: ")
     direccion_nueva = input("Introduce la dirección a modificar: ") 
-    sql= "UPDATE aeropuerto SET Direccion = %s WHERE cod_aeropuerto = %s;" % direccion_nueva, codigo_aeropuerto
+    sql= "UPDATE aeropuerto SET Direccion = '%s' WHERE cod_aeropuerto = '%s';" % (direccion_nueva, codigo_aeropuerto)
     cursor = db.cursor()
     try:
         cursor.execute(sql)
