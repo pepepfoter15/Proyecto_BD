@@ -1,7 +1,7 @@
 from FuncionesOracle import *
 
 #Ejercicio para la prueba de la funciones
-db = conectar_BD("localhost","pepe","root","pythonbbdd")
+db = conectar_BD()
 opcionelegida = menu()
 
 while opcionelegida != 7:
@@ -23,6 +23,8 @@ while opcionelegida != 7:
 
     elif opcionelegida == 6:
         opcion6(db)
+    
+    opcionelegida=menu()
 
 if opcionelegida == 7:
     desconectar_BD(db)
