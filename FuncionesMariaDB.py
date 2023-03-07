@@ -78,7 +78,7 @@ def opcion2(db):
 #3 ejercicio -> Buscar información relacionada: Pedimos el codigo del aeropuerto,que sea nacional, para que nos muestre la longuitud de la pista de aterrizaje y la orientación de las pistas (implico 2 tablas: nacional y aeropuerto).
 def opcion3(db):
     codigo_aeropuerto_nacional = input("Introduce el codigo del aeropuerto nacional: ")
-    sql = "SELECT Longitud_pista_aterrizaje, Orientacion_pista FROM nacional n WHERE cod_aeropuerto = '%s' in (SELECT cod_aeropuerto FROM aeropuerto a WHERE n.cod_aeropuerto = n.cod_aeropuerto);" % codigo_aeropuerto_nacional
+    sql = "SELECT Longitud_pista_aterrizaje, Orientacion_pista FROM nacional n WHERE cod_aeropuerto = '%s' in (SELECT cod_aeropuerto FROM aeropuerto a WHERE n.cod_aeropuerto = a.cod_aeropuerto);" % (codigo_aeropuerto_nacional)
     cursor = db.cursor()
     try:
         cursor.execute(sql)
@@ -87,7 +87,8 @@ def opcion3(db):
             longitud= registro[0]
             orientacion =registro[1]
             print("Longitud de pista de aterrizaje:",longitud,"Orientación de la pista:",orientacion)
-            return registros
+        
+        return registros
         db.commit()
     except:
         db.rollback()
@@ -126,7 +127,7 @@ def opcion5(db):
 def opcion6(db):
     codigo_aeropuerto = input("Introduce el codigo del aeropuerto que quieres modificar su dirección: ")
     direccion_nueva = input("Introduce la dirección a modificar: ") 
-    sql= "UPDATE aeropuerto SET Direccion = '%s' WHERE cod_aeropuerto = '%s';" % direccion_nueva, codigo_aeropuerto
+    sql= "UPDATE aeropuerto SET Direccion = '%s' WHERE cod_aeropuerto = '%s';" % (direccion_nueva, codigo_aeropuerto)
     cursor = db.cursor()
     try:
         cursor.execute(sql)
